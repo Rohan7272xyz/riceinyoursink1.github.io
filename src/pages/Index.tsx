@@ -124,7 +124,7 @@ const Index = () => (
       <img
         src="/profile.jpg"
         alt=""
-        className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover grayscale mb-6 md:mb-0"
+        className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover mb-6 md:mb-0"
       />
       <div>
         <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
