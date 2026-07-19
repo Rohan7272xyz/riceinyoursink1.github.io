@@ -25,7 +25,7 @@ const experience: Entry[] = [
     dates: "Mar 2026 to present",
     meta: "Blacksburg, VA",
     bullets: [
-      "Designed, built, and shipped a production VT/Blacksburg Transit app reaching 2,000+ downloads in its first month and 500+ daily active users, with native iOS/Android clients and a Python/FastAPI backend.",
+      "Designed, built, and shipped a production VT/Blacksburg Transit app reaching 2,000+ downloads in its first month and 1,000+ daily active users, with native iOS/Android clients and a Python/FastAPI backend.",
       "Engineered a resilient arrivals pipeline that fuses live Blacksburg Transit feeds with GTFS schedules using confidence tiers, stale-data detection, and automatic fallback to maintain service through tracker and API outages.",
       "Own the full production and staging infrastructure, including deployment automation, rate limiting, backups, and incident monitoring that reduced silent feed-failure detection from three days to under two minutes.",
       "Built a 61-endpoint API backed by 1,500+ automated backend test cases, covering live-data ingestion, arrival predictions, alerts, authentication, and failure recovery.",
