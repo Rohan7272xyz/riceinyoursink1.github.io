@@ -1,271 +1,493 @@
-type Entry = {
-  org: string;
-  role: string;
-  dates: string;
-  meta?: string;
-  bullets: string[];
-};
+const EMAIL = "mailto:rohan7272@vt.edu";
+const GITHUB = "https://github.com/Rohan7272xyz";
+const LINKEDIN = "https://www.linkedin.com/in/rohan-anand-0657381bb/";
 
-type Venture = {
+const CONTAINER = "mx-auto w-full max-w-[1120px] px-5 md:px-8";
+const LABEL =
+  "font-mono-label text-xs uppercase tracking-[0.1em] text-subtle";
+const EXT = { target: "_blank", rel: "noopener noreferrer" } as const;
+
+type WorkItem = {
+  meta: string;
   name: string;
-  status: string;
-  role?: string;
-  dates?: string;
-  meta?: string;
-  bullets?: string[];
-  text?: string;
+  summary: string;
+  facts: string[];
+  tech?: string;
+  more?: string[];
 };
 
-const experience: Entry[] = [
+const work: WorkItem[] = [
   {
-    org: "Leidos",
-    role: "Systems Integration & Software Engineering Intern, AI Automation",
-    dates: "Jun 2026 to present",
-    bullets: [
-      "Own AI automation tooling for FAA air-traffic modernization, accelerating defect triage, test analysis, and manager reporting across software, systems, and integration/test teams.",
-      "Developed a Python-backed defect-triage workflow that ingests multi-gigabyte test tarballs containing millions of mixed-format log lines, filters noise, organizes recurring failures into actionable signatures, checks Jira for duplicate PTRs, and drafts human-reviewed records.",
-      "Extended the workflow to hand unresolved failures to a coding agent that investigates errors, generates proposed fixes, and routes remediation for software-developer review.",
-      "Delivered the initial PTR capability in about 15 hours against a 60-hour estimate, completing Phase 1 and Phase 2 demonstrations within the first three weeks.",
-      "Built Jira/JQL status-report automation for manager-ready progress summaries; developing regression-test deduplication tooling to surface redundant coverage and recommend tests to retain or remove.",
+    meta: "01 · 2026",
+    name: "Hokie Transit",
+    summary:
+      "A production transit app for the Virginia Tech community: native iOS and Android clients on a Python/FastAPI backend, built, shipped, and operated end to end.",
+    facts: [
+      "2,000+ downloads in the first month; 1,000+ daily active users.",
+      "61-endpoint API backed by 1,500+ automated backend test cases covering live-data ingestion, arrival predictions, alerts, authentication, and failure recovery.",
+      "Incident monitoring cut silent feed-failure detection from three days to under two minutes.",
+    ],
+    tech: "SwiftUI · Kotlin · Python · FastAPI",
+    more: [
+      "Resilient arrivals pipeline fuses live Blacksburg Transit feeds with GTFS schedules using confidence tiers, stale-data detection, and automatic fallback to stay in service through tracker and API outages.",
+      "Full ownership of production and staging infrastructure: deployment automation, rate limiting, backups, and incident monitoring.",
     ],
   },
   {
-    org: "MAG Aerospace",
-    role: "Technical Engineering Intern, C5ISR",
-    dates: "Winter 2024, Summer 2025",
-    bullets: [
-      "Built closed-system automation for C5ISR capture workflows, including Salesforce to Python/Excel/VBA pipeline reporting and an offline Acronym Finder for RFI/proposal compliance; reduced manual processing from hours to minutes.",
-      "Evaluated ISR platforms, GPS-denied navigation options, requirements, CONOPS, and procurement concepts across a $400M C5ISR portfolio.",
-      "Served as Pink/Red Team reviewer during proposal recovery, correcting compliance, org-chart, and past-performance issues across defense and homeland-security pursuits.",
+    meta: "02 · 2025",
+    name: "DeepFlight / AFPL",
+    summary:
+      "Co-founded a four-student UAV sensing team, now operating as the Autonomous Flight and Perception Lab under AOE Department Head Dr. Ella Atkins, with 3-credit research backing.",
+    facts: [
+      "Architected and integrated OPSS, a real-time airborne target-tracking pipeline: RealSense sensing, YOLOv8 detection, Kalman/UKF/particle-filter tracking, physics validation and fusion, and robot-control output.",
+      "Led hardware and software integration for a ground-based pan/tilt tracking system through a live drone-park demo.",
+      "Authored LaTeX PDR/CDR documentation and presented design trades, test plans, and results through biweekly faculty reviews and final CDR.",
+    ],
+    tech: "Python · YOLOv8 · RealSense · FastAPI",
+  },
+  {
+    meta: "03 · Active",
+    name: "NEXUS",
+    summary:
+      "A personal multi-agent orchestration framework: a planner model decomposes goals into scoped, self-contained directives and dispatches them to terminal coding agents on my machines.",
+    facts: [
+      "Every worker reports under an evidence contract; a status claim is audited against its evidence before it is accepted.",
+      "Directives are validated, deduplicated, and run in isolated sessions, so work survives disconnects and stays reproducible.",
+    ],
+  },
+  {
+    meta: "04 · Concluded",
+    name: "CrossCheck AI",
+    summary:
+      "A product that ran the same question across multiple language models independently and surfaced agreement and disagreement, treating a single model's confident answer as a claim, not a verdict.",
+    facts: [
+      "The multi-model answer-and-verify core worked; payments and production infrastructure were operational; the product launched publicly.",
+      "Shut down after failing to validate distribution: a working product without a credible distribution advantage is not a viable business.",
+    ],
+  },
+  {
+    meta: "05 · Concluded",
+    name: "CoinFluence",
+    summary:
+      'A market for investing in the creators people watch every day, born from the "investing in this" culture of short-form comment sections.',
+    facts: [
+      "Built production AWS infrastructure at my own expense, plus on-chain token, vesting, and liquidity systems on Solana.",
+      "Held hundreds of sales conversations with prospective users and creators.",
+      "Wound down after learning too late that securities regulation and capital requirements made the real-money model untenable.",
     ],
   },
 ];
 
-const ventures: Venture[] = [
+type Job = {
+  company: string;
+  role: string;
+  dates: string;
+  summary: string;
+  bullets: string[];
+  more?: string[];
+};
+
+const jobs: Job[] = [
   {
-    name: "Hokie Transit",
-    role: "Founder & Full-Stack Engineer",
-    dates: "Mar 2026 to present",
-    status: "Active",
-    meta: "Blacksburg, VA",
+    company: "Leidos",
+    role: "Systems Integration & Software Engineering Intern, AI Automation",
+    dates: "Jun 2026 to present",
+    summary:
+      "AI automation tooling for FAA air-traffic modernization, accelerating defect triage, test analysis, and manager reporting across software, systems, and integration/test teams.",
     bullets: [
-      "Designed, built, and shipped a production VT/Blacksburg Transit app reaching 2,000+ downloads in its first month and 1,000+ daily active users, with native iOS/Android clients and a Python/FastAPI backend.",
-      "Engineered a resilient arrivals pipeline that fuses live Blacksburg Transit feeds with GTFS schedules using confidence tiers, stale-data detection, and automatic fallback to maintain service through tracker and API outages.",
-      "Own the full production and staging infrastructure, including deployment automation, rate limiting, backups, and incident monitoring that reduced silent feed-failure detection from three days to under two minutes.",
-      "Built a 61-endpoint API backed by 1,500+ automated backend test cases, covering live-data ingestion, arrival predictions, alerts, authentication, and failure recovery.",
+      "Built a Python defect-triage workflow that ingests multi-gigabyte test tarballs with millions of mixed-format log lines, filters noise, organizes recurring failures into actionable signatures, checks Jira for duplicate PTRs, and drafts human-reviewed records.",
+      "Delivered the initial PTR capability in about 15 hours against a 60-hour estimate, completing Phase 1 and Phase 2 demonstrations within the first three weeks.",
+      "Extended the workflow to hand unresolved failures to a coding agent that investigates errors, generates proposed fixes, and routes remediation for software-developer review.",
+    ],
+    more: [
+      "Built Jira/JQL status-report automation for manager-ready progress summaries; developing regression-test deduplication tooling to surface redundant coverage and recommend tests to retain or remove.",
     ],
   },
   {
-    name: "DeepFlight / Autonomous Flight and Perception Lab (AFPL)",
-    role: "Co-Founder & Software Integration Lead",
-    dates: "Apr 2025 to present",
-    status: "Active",
+    company: "MAG Aerospace",
+    role: "Technical Engineering Intern, C5ISR",
+    dates: "Winter 2024, Summer 2025",
+    summary: "Capture and proposal engineering across a $400M C5ISR portfolio.",
     bullets: [
-      "Co-founded DeepFlight, a four-student UAV sensing team later operating as the Autonomous Flight & Perception Lab (AFPL) under AOE Department Head Dr. Ella Atkins; earned 3-credit research backing to develop the Optical Projectile Sensing System (OPSS).",
-      "Architected and integrated OPSS, a real-time airborne target-tracking pipeline spanning RealSense sensing, YOLOv8 detection, Kalman/UKF/particle-filter tracking, physics validation and fusion, FastAPI visualization, and robot-control output.",
-      "Led hardware/software integration for a ground-based pan/tilt tracking system, coordinating camera, actuator, embedded compute, simulation, real-time tracking loop, and drone-park demo components.",
-      "Authored LaTeX PDR/CDR documentation and presented design trades, test plans and results, system limitations, and integration findings through biweekly faculty reviews and final CDR.",
+      "Built closed-system automation for C5ISR capture workflows: Salesforce to Python/Excel/VBA pipeline reporting and an offline Acronym Finder for RFI and proposal compliance, reducing manual processing from hours to minutes.",
+      "Evaluated ISR platforms, GPS-denied navigation options, requirements, CONOPS, and procurement concepts across the portfolio.",
+      "Served as Pink/Red Team reviewer during proposal recovery, correcting compliance, org-chart, and past-performance issues across defense and homeland-security pursuits.",
     ],
-  },
-  {
-    name: "NEXUS",
-    status: "Active",
-    text: "A personal multi-agent orchestration framework. A planner model decomposes goals into scoped, self-contained directives and dispatches them to terminal coding agents running on my machines; every worker reports back under an evidence contract, and claims are audited before they are accepted.",
-  },
-  {
-    name: "CrossCheck AI",
-    status: "Concluded",
-    text: "Ran the same question across multiple language models independently and surfaced agreement and disagreement, treating a single model's confident answer as a claim, not a verdict. The software worked, payments and production infrastructure were operational, and the product launched publicly. I shut it down after learning that a working product without a credible distribution advantage is not a viable business.",
-  },
-  {
-    name: "CoinFluence",
-    status: "Concluded",
-    text: "A market for investing in the creators people watch every day, born from the \"investing in this\" culture of short-form comment sections. I built production AWS infrastructure at my own expense, on-chain token, vesting, and liquidity systems on Solana, and held hundreds of sales conversations with prospective users and creators. I learned too late that securities regulation and capital requirements made the real-money model untenable, and wound it down.",
   },
 ];
 
 const papers = [
   { title: "OPSS White Paper Vol. 1", href: "/White_Paper_Vol1_OPSS.pdf" },
   { title: "VANNA Business Case", href: "/Business_Case_VANNA.pdf" },
-  { title: "VANNA White Paper Vol. 2 (Defense)", href: "/White_Paper_Vol2_VANNA(defense).pdf" },
-  { title: "VANNA White Paper Vol. 2 (Prime)", href: "/White_Paper_Vol2_VANNA(prime).pdf" },
+  {
+    title: "VANNA White Paper Vol. 2 (Defense)",
+    href: "/White_Paper_Vol2_VANNA(defense).pdf",
+  },
+  {
+    title: "VANNA White Paper Vol. 2 (Prime)",
+    href: "/White_Paper_Vol2_VANNA(prime).pdf",
+  },
 ];
 
 const skills = [
-  { group: "Languages", items: "Python, FastAPI, Bash, SQL/JQL, JavaScript/TypeScript, SwiftUI, Kotlin, MATLAB/Simulink, Git" },
-  { group: "Cloud & infra", items: "AWS, Docker, Cloudflare, Linux/VPS, nginx, CI/CD, load balancing, rate limiting" },
-  { group: "Systems", items: "Jira, Confluence, TestStat, SQLite/PostgreSQL, REST APIs, Firebase/Auth, MCP, Claude Code" },
-  { group: "AI & testing", items: "Human-in-the-loop automation, LLM tool-use, debugging, root-cause analysis, pytest, YOLOv7/v8, PID, Kalman filtering, Gazebo, ROS" },
+  {
+    group: "Software",
+    items: "Python, FastAPI, SwiftUI, Kotlin, JavaScript/TypeScript, Bash, SQL/JQL",
+  },
+  {
+    group: "Systems",
+    items: "AWS, Docker, Linux, nginx, CI/CD, REST APIs, Jira, SQLite/PostgreSQL",
+  },
+  {
+    group: "Autonomy",
+    items: "MATLAB/Simulink, ROS, Gazebo, YOLOv7/v8, Kalman filtering, PID",
+  },
 ];
 
-const Section = ({
-  label,
-  delay,
-  children,
-}: {
-  label: string;
-  delay: string;
-  children: React.ReactNode;
-}) => (
-  <section
-    className="reveal mt-16 md:mt-20 md:grid md:grid-cols-[11rem_1fr] md:gap-8"
-    style={{ animationDelay: delay }}
-  >
-    <h2 className="text-sm font-medium text-muted-foreground mb-6 md:mb-0 md:pt-0.5">
-      {label}
-    </h2>
-    <div>{children}</div>
-  </section>
+const Fact = ({ children }: { children: React.ReactNode }) => (
+  <li className="relative pl-4 text-[15px] leading-relaxed text-muted-foreground before:absolute before:left-0 before:content-['·'] before:text-subtle">
+    {children}
+  </li>
+);
+
+const MoreDetails = ({ items }: { items: string[] }) => (
+  <details className="mt-2">
+    <summary className="inline-flex min-h-[44px] cursor-pointer items-center font-mono-label text-xs uppercase tracking-[0.1em] text-subtle hover:text-primary">
+      More details
+    </summary>
+    <ul className="mb-2 space-y-2">
+      {items.map((m, i) => (
+        <Fact key={i}>{m}</Fact>
+      ))}
+    </ul>
+  </details>
 );
 
 const Index = () => (
-  <main className="mx-auto max-w-4xl px-6 sm:px-10 py-20 sm:py-28 md:py-36">
-    <header className="reveal md:grid md:grid-cols-[11rem_1fr] md:gap-8">
-      <img
-        src="/profile.jpg"
-        alt=""
-        className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover mb-6 md:mb-0"
-      />
-      <div>
-        <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
+  <>
+    <a
+      href="#main"
+      className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-background focus:px-3 focus:py-2 focus:text-sm"
+    >
+      Skip to content
+    </a>
+
+    <header className="sticky top-0 z-40 border-b border-border bg-background">
+      <div className={`${CONTAINER} flex h-16 items-center justify-between`}>
+        <a href="#main" className="text-[15px] font-semibold tracking-tight">
           Rohan Anand
-        </h1>
-        <p className="text-muted-foreground mt-1">
-          Software &amp; systems · Virginia Tech
-        </p>
-
-        <p className="mt-6 leading-relaxed max-w-2xl md:text-lg md:leading-relaxed">
-          Systems integration and software engineering, with a focus on
-          human-reviewed AI automation. Founder of Hokie Transit.
-        </p>
-
-        <p className="mt-5 text-sm text-muted-foreground">
-          <a href="mailto:rohan7272@vt.edu" className="link">Email</a>
-          <span className="mx-2.5">·</span>
-          <a href="https://github.com/Rohan7272xyz" target="_blank" rel="noopener noreferrer" className="link">GitHub</a>
-          <span className="mx-2.5">·</span>
-          <a href="https://www.linkedin.com/in/rohan-anand-0657381bb/" target="_blank" rel="noopener noreferrer" className="link">LinkedIn</a>
-        </p>
+        </a>
+        <nav aria-label="Site">
+          <ul className="flex items-center gap-1 sm:gap-4">
+            {[
+              ["Work", "#work"],
+              ["Experience", "#experience"],
+              ["About", "#about"],
+            ].map(([t, href]) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  className="link-draw inline-flex min-h-[44px] items-center px-2 text-sm text-muted-foreground hover:text-foreground"
+                >
+                  {t}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </header>
 
-    <Section label="Experience" delay="0.1s">
-      <div className="space-y-12">
-        {experience.map((e) => (
-          <article key={e.org}>
-            <div className="flex items-baseline justify-between gap-4">
-              <h3 className="font-medium md:text-lg">{e.org}</h3>
-              <span className="text-xs text-muted-foreground whitespace-nowrap">{e.dates}</span>
-            </div>
-            <p className="text-sm text-muted-foreground mt-0.5">
-              {e.role}
-              {e.meta ? ` · ${e.meta}` : ""}
+    <main id="main">
+      {/* Hero */}
+      <section className={`${CONTAINER} pb-24 pt-[88px]`}>
+        <div className="md:grid md:grid-cols-[140px_1fr] md:gap-10">
+          <img
+            src="/profile.jpg"
+            alt="Rohan Anand"
+            width={132}
+            height={165}
+            className="mb-8 h-[165px] w-[132px] rounded border border-border object-cover md:mb-0"
+          />
+          <div>
+            <h1 className="text-[clamp(44px,6vw,68px)] font-semibold leading-[1.05] tracking-tight">
+              Rohan Anand
+            </h1>
+            <p className="mt-5 max-w-[46rem] text-[clamp(21px,2.3vw,29px)] font-normal leading-snug">
+              Aerospace engineering student building reliable software and
+              systems for real-world operations.
             </p>
-            <ul className="mt-3 space-y-2">
-              {e.bullets.map((b, i) => (
-                <li
-                  key={i}
-                  className="text-sm leading-relaxed text-muted-foreground pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-muted-foreground/60"
+            <p className="mt-5 max-w-[68ch] leading-relaxed text-muted-foreground">
+              Currently working across systems integration, transportation, and
+              autonomous flight, including AI-assisted automation at Leidos and
+              production transit software at Hokie Transit.
+            </p>
+            <ul className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-0">
+              <li>
+                <a
+                  href="#work"
+                  className="link-draw inline-flex min-h-[44px] items-center text-[15px]"
                 >
-                  {b}
+                  Selected work ↓
+                </a>
+              </li>
+              <li>
+                <a
+                  href={EMAIL}
+                  className="link-draw inline-flex min-h-[44px] items-center text-[15px] text-muted-foreground hover:text-foreground"
+                >
+                  Email ↗
+                </a>
+              </li>
+              <li>
+                <a
+                  href={GITHUB}
+                  {...EXT}
+                  className="link-draw inline-flex min-h-[44px] items-center text-[15px] text-muted-foreground hover:text-foreground"
+                >
+                  GitHub ↗
+                </a>
+              </li>
+              <li>
+                <a
+                  href={LINKEDIN}
+                  {...EXT}
+                  className="link-draw inline-flex min-h-[44px] items-center text-[15px] text-muted-foreground hover:text-foreground"
+                >
+                  LinkedIn ↗
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Selected Work */}
+      <section id="work" aria-labelledby="work-h" className="scroll-mt-16">
+        <div className={CONTAINER}>
+          <h2 id="work-h" className={`${LABEL} border-t border-border pt-6`}>
+            Selected Work
+          </h2>
+          <div className="divide-y divide-border">
+            {/* Featured: Hokie Transit, with real app screenshot */}
+            <article className="py-10 md:grid md:grid-cols-[1fr_260px] md:gap-12 md:py-14">
+              <div>
+                <p className={LABEL}>{work[0].meta}</p>
+                <h3 className="mt-2 text-[23px] font-semibold tracking-tight md:text-[25px]">
+                  {work[0].name}
+                </h3>
+                <p className="mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">
+                  {work[0].summary}
+                </p>
+                <ul className="mt-4 max-w-[68ch] space-y-2">
+                  {work[0].facts.map((f, i) => (
+                    <Fact key={i}>{f}</Fact>
+                  ))}
+                </ul>
+                {work[0].more && <MoreDetails items={work[0].more} />}
+                <p className={`${LABEL} mt-4 normal-case tracking-normal`}>
+                  {work[0].tech}
+                </p>
+              </div>
+              <figure className="img-frame mt-8 md:mt-1">
+                <div className="max-w-[240px] overflow-hidden rounded border border-border md:max-w-none">
+                  <img
+                    src="/hokie-transit-app.png"
+                    alt="HokieTransit iOS home screen showing live Blacksburg Transit arrivals and a departure suggestion"
+                    width={720}
+                    height={1565}
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-auto w-full"
+                  />
+                </div>
+                <figcaption className="mt-2 font-mono-label text-xs text-subtle">
+                  Production app, live arrivals view
+                </figcaption>
+              </figure>
+            </article>
+
+            {work.slice(1).map((w) => (
+              <article key={w.name} className="py-10 md:py-12">
+                <p className={LABEL}>{w.meta}</p>
+                <h3 className="mt-2 text-[23px] font-semibold tracking-tight">
+                  {w.name}
+                </h3>
+                <p className="mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">
+                  {w.summary}
+                </p>
+                <ul className="mt-4 max-w-[68ch] space-y-2">
+                  {w.facts.map((f, i) => (
+                    <Fact key={i}>{f}</Fact>
+                  ))}
+                </ul>
+                {w.more && <MoreDetails items={w.more} />}
+                {w.tech && (
+                  <p className={`${LABEL} mt-4 normal-case tracking-normal`}>
+                    {w.tech}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section
+        id="experience"
+        aria-labelledby="experience-h"
+        className="scroll-mt-16"
+      >
+        <div className={CONTAINER}>
+          <div className="border-t border-border pt-6 md:grid md:grid-cols-[11rem_1fr] md:gap-8">
+            <h2 id="experience-h" className={`${LABEL} mb-8 md:mb-0`}>
+              Experience
+            </h2>
+            <div className="space-y-14 pb-4">
+              {jobs.map((j) => (
+                <article key={j.company}>
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                    <h3 className="text-[22px] font-semibold tracking-tight">
+                      {j.company}
+                    </h3>
+                    <p className="font-mono-label text-xs text-subtle sm:whitespace-nowrap">
+                      {j.dates}
+                    </p>
+                  </div>
+                  <p className="mt-0.5 text-[15px] text-subtle">{j.role}</p>
+                  <p className="mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">
+                    {j.summary}
+                  </p>
+                  <ul className="mt-4 max-w-[68ch] space-y-2">
+                    {j.bullets.map((b, i) => (
+                      <Fact key={i}>{b}</Fact>
+                    ))}
+                  </ul>
+                  {j.more && <MoreDetails items={j.more} />}
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About / Education */}
+      <section id="about" aria-labelledby="about-h" className="scroll-mt-16">
+        <div className={CONTAINER}>
+          <div className="border-t border-border pt-6 md:grid md:grid-cols-[11rem_1fr] md:gap-8">
+            <h2 id="about-h" className={`${LABEL} mb-8 md:mb-0`}>
+              About
+            </h2>
+            <div className="pb-4">
+              <p className="max-w-[68ch] leading-relaxed">
+                I study aerospace engineering at Virginia Tech and build
+                production software around it: systems integration, transit
+                operations, and autonomous flight. My current focus is
+                human-reviewed AI automation, where AI does the heavy lifting
+                and a person stays in the loop for every decision that matters.
+              </p>
+              <div className="mt-8">
+                <h3 className="text-[15px] font-semibold">Virginia Tech</h3>
+                <p className="mt-1 max-w-[68ch] text-[15px] leading-relaxed text-muted-foreground">
+                  B.S. Aerospace Engineering, May 2028. GPA 3.7/4.0. Secret
+                  clearance in adjudication.
+                </p>
+              </div>
+              <dl className="mt-8 space-y-2">
+                {skills.map((s) => (
+                  <div
+                    key={s.group}
+                    className="sm:grid sm:grid-cols-[6.5rem_1fr] sm:gap-3"
+                  >
+                    <dt className="font-mono-label text-xs uppercase tracking-[0.1em] text-subtle sm:pt-1">
+                      {s.group}
+                    </dt>
+                    <dd className="text-[15px] leading-relaxed text-muted-foreground">
+                      {s.items}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Writing */}
+      <section
+        id="writing"
+        aria-labelledby="writing-h"
+        className="scroll-mt-16"
+      >
+        <div className={CONTAINER}>
+          <div className="border-t border-border pt-6 md:grid md:grid-cols-[11rem_1fr] md:gap-8">
+            <h2 id="writing-h" className={`${LABEL} mb-8 md:mb-0`}>
+              Writing
+            </h2>
+            <ul className="pb-10 md:-mt-3">
+              {papers.map((p) => (
+                <li
+                  key={p.href}
+                  className="border-b border-border last:border-0"
+                >
+                  <a
+                    href={p.href}
+                    {...EXT}
+                    className="row-link flex items-baseline justify-between gap-4 py-3.5"
+                  >
+                    <span className="row-title text-muted-foreground">
+                      {p.title}
+                    </span>
+                    <span className="row-arrow font-mono-label text-xs text-subtle">
+                      PDF ↗
+                    </span>
+                  </a>
                 </li>
               ))}
             </ul>
-          </article>
-        ))}
-      </div>
-    </Section>
+          </div>
+        </div>
+      </section>
+    </main>
 
-    <Section label="Ventures" delay="0.15s">
-      <div className="space-y-10">
-        {ventures.map((v) => (
-          <article key={v.name}>
-            <div className="flex items-baseline justify-between gap-4">
-              <h3 className="font-medium md:text-lg">{v.name}</h3>
-              <span className="text-xs text-muted-foreground whitespace-nowrap">
-                {v.dates ? `${v.dates} · ${v.status}` : v.status}
-              </span>
-            </div>
-            {v.role && (
-              <p className="text-sm text-muted-foreground mt-0.5">
-                {v.role}
-                {v.meta ? ` · ${v.meta}` : ""}
-              </p>
-            )}
-            {v.bullets ? (
-              <ul className="mt-3 space-y-2">
-                {v.bullets.map((b, i) => (
-                  <li
-                    key={i}
-                    className="text-sm leading-relaxed text-muted-foreground pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-muted-foreground/60"
-                  >
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground max-w-2xl">
-                {v.text}
-              </p>
-            )}
-          </article>
-        ))}
-      </div>
-    </Section>
-
-    <Section label="Writing" delay="0.2s">
-      <ul className="-mt-3">
-        {papers.map((p) => (
-          <li key={p.href} className="border-b border-border/60 last:border-0">
+    <footer className="border-t border-border">
+      <div className={`${CONTAINER} py-14`}>
+        <p className="text-[15px] font-semibold">Rohan Anand</p>
+        <ul className="mt-3 flex flex-wrap items-center gap-x-7">
+          <li>
             <a
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-baseline justify-between gap-4 py-3.5"
+              href={EMAIL}
+              className="link-draw inline-flex min-h-[44px] items-center text-[15px] text-muted-foreground hover:text-foreground"
             >
-              <span className="text-foreground/90 group-hover:text-foreground transition-colors">
-                {p.title}
-              </span>
-              <span className="text-xs text-muted-foreground whitespace-nowrap">
-                PDF ↗
-              </span>
+              Email
             </a>
           </li>
-        ))}
-      </ul>
-    </Section>
-
-    <Section label="Skills" delay="0.25s">
-      <dl className="space-y-4">
-        {skills.map((s) => (
-          <div key={s.group} className="md:grid md:grid-cols-[8rem_1fr] md:gap-4">
-            <dt className="text-sm text-muted-foreground/70">{s.group}</dt>
-            <dd className="text-sm leading-relaxed text-muted-foreground mt-0.5 md:mt-0">
-              {s.items}
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </Section>
-
-    <Section label="Education" delay="0.3s">
-      <div className="flex items-baseline justify-between gap-4">
-        <h3 className="font-medium">Virginia Tech</h3>
-        <span className="text-xs text-muted-foreground whitespace-nowrap">May 2028</span>
+          <li>
+            <a
+              href={GITHUB}
+              {...EXT}
+              className="link-draw inline-flex min-h-[44px] items-center text-[15px] text-muted-foreground hover:text-foreground"
+            >
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a
+              href={LINKEDIN}
+              {...EXT}
+              className="link-draw inline-flex min-h-[44px] items-center text-[15px] text-muted-foreground hover:text-foreground"
+            >
+              LinkedIn
+            </a>
+          </li>
+        </ul>
+        <p className="mt-6 font-mono-label text-xs text-subtle">
+          © 2026 Rohan Anand · rohananand.xyz
+        </p>
       </div>
-      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-        B.S. Aerospace Engineering · GPA 3.7/4.0 · Secret clearance in
-        adjudication
-      </p>
-    </Section>
-
-    <footer className="reveal mt-20 md:mt-24 pt-6 border-t border-border/60 md:grid md:grid-cols-[11rem_1fr] md:gap-8" style={{ animationDelay: "0.35s" }}>
-      <span className="hidden md:block" />
-      <p className="text-xs text-muted-foreground">
-        © 2026 Rohan Anand · <span className="select-all">rohan7272@vt.edu</span>
-      </p>
     </footer>
-  </main>
+  </>
 );
 
 export default Index;
