@@ -6,6 +6,16 @@ type Entry = {
   bullets: string[];
 };
 
+type Venture = {
+  name: string;
+  status: string;
+  role?: string;
+  dates?: string;
+  meta?: string;
+  bullets?: string[];
+  text?: string;
+};
+
 const experience: Entry[] = [
   {
     org: "Leidos",
@@ -20,29 +30,6 @@ const experience: Entry[] = [
     ],
   },
   {
-    org: "Hokie Transit",
-    role: "Founder & Full-Stack Engineer",
-    dates: "Mar 2026 to present",
-    meta: "Blacksburg, VA",
-    bullets: [
-      "Designed, built, and shipped a production VT/Blacksburg Transit app reaching 2,000+ downloads in its first month and 1,000+ daily active users, with native iOS/Android clients and a Python/FastAPI backend.",
-      "Engineered a resilient arrivals pipeline that fuses live Blacksburg Transit feeds with GTFS schedules using confidence tiers, stale-data detection, and automatic fallback to maintain service through tracker and API outages.",
-      "Own the full production and staging infrastructure, including deployment automation, rate limiting, backups, and incident monitoring that reduced silent feed-failure detection from three days to under two minutes.",
-      "Built a 61-endpoint API backed by 1,500+ automated backend test cases, covering live-data ingestion, arrival predictions, alerts, authentication, and failure recovery.",
-    ],
-  },
-  {
-    org: "DeepFlight / Autonomous Flight and Perception Lab (AFPL)",
-    role: "Co-Founder & Software Integration Lead",
-    dates: "Apr 2025 to present",
-    bullets: [
-      "Co-founded DeepFlight, a four-student UAV sensing team later operating as the Autonomous Flight & Perception Lab (AFPL) under AOE Department Head Dr. Ella Atkins; earned 3-credit research backing to develop the Optical Projectile Sensing System (OPSS).",
-      "Architected and integrated OPSS, a real-time airborne target-tracking pipeline spanning RealSense sensing, YOLOv8 detection, Kalman/UKF/particle-filter tracking, physics validation and fusion, FastAPI visualization, and robot-control output.",
-      "Led hardware/software integration for a ground-based pan/tilt tracking system, coordinating camera, actuator, embedded compute, simulation, real-time tracking loop, and drone-park demo components.",
-      "Authored LaTeX PDR/CDR documentation and presented design trades, test plans and results, system limitations, and integration findings through biweekly faculty reviews and final CDR.",
-    ],
-  },
-  {
     org: "MAG Aerospace",
     role: "Technical Engineering Intern, C5ISR",
     dates: "Winter 2024, Summer 2025",
@@ -54,16 +41,36 @@ const experience: Entry[] = [
   },
 ];
 
-const ventures = [
+const ventures: Venture[] = [
+  {
+    name: "Hokie Transit",
+    role: "Founder & Full-Stack Engineer",
+    dates: "Mar 2026 to present",
+    status: "Active",
+    meta: "Blacksburg, VA",
+    bullets: [
+      "Designed, built, and shipped a production VT/Blacksburg Transit app reaching 2,000+ downloads in its first month and 1,000+ daily active users, with native iOS/Android clients and a Python/FastAPI backend.",
+      "Engineered a resilient arrivals pipeline that fuses live Blacksburg Transit feeds with GTFS schedules using confidence tiers, stale-data detection, and automatic fallback to maintain service through tracker and API outages.",
+      "Own the full production and staging infrastructure, including deployment automation, rate limiting, backups, and incident monitoring that reduced silent feed-failure detection from three days to under two minutes.",
+      "Built a 61-endpoint API backed by 1,500+ automated backend test cases, covering live-data ingestion, arrival predictions, alerts, authentication, and failure recovery.",
+    ],
+  },
+  {
+    name: "DeepFlight / Autonomous Flight and Perception Lab (AFPL)",
+    role: "Co-Founder & Software Integration Lead",
+    dates: "Apr 2025 to present",
+    status: "Active",
+    bullets: [
+      "Co-founded DeepFlight, a four-student UAV sensing team later operating as the Autonomous Flight & Perception Lab (AFPL) under AOE Department Head Dr. Ella Atkins; earned 3-credit research backing to develop the Optical Projectile Sensing System (OPSS).",
+      "Architected and integrated OPSS, a real-time airborne target-tracking pipeline spanning RealSense sensing, YOLOv8 detection, Kalman/UKF/particle-filter tracking, physics validation and fusion, FastAPI visualization, and robot-control output.",
+      "Led hardware/software integration for a ground-based pan/tilt tracking system, coordinating camera, actuator, embedded compute, simulation, real-time tracking loop, and drone-park demo components.",
+      "Authored LaTeX PDR/CDR documentation and presented design trades, test plans and results, system limitations, and integration findings through biweekly faculty reviews and final CDR.",
+    ],
+  },
   {
     name: "NEXUS",
     status: "Active",
     text: "A personal multi-agent orchestration framework. A planner model decomposes goals into scoped, self-contained directives and dispatches them to terminal coding agents running on my machines; every worker reports back under an evidence contract, and claims are audited before they are accepted.",
-  },
-  {
-    name: "Creator Predict",
-    status: "Active",
-    text: "A fantasy-football-style game built around creators and their real-world popularity.",
   },
   {
     name: "CrossCheck AI",
@@ -174,12 +181,33 @@ const Index = () => (
         {ventures.map((v) => (
           <article key={v.name}>
             <div className="flex items-baseline justify-between gap-4">
-              <h3 className="font-medium">{v.name}</h3>
-              <span className="text-xs text-muted-foreground whitespace-nowrap">{v.status}</span>
+              <h3 className="font-medium md:text-lg">{v.name}</h3>
+              <span className="text-xs text-muted-foreground whitespace-nowrap">
+                {v.dates ? `${v.dates} · ${v.status}` : v.status}
+              </span>
             </div>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground max-w-2xl">
-              {v.text}
-            </p>
+            {v.role && (
+              <p className="text-sm text-muted-foreground mt-0.5">
+                {v.role}
+                {v.meta ? ` · ${v.meta}` : ""}
+              </p>
+            )}
+            {v.bullets ? (
+              <ul className="mt-3 space-y-2">
+                {v.bullets.map((b, i) => (
+                  <li
+                    key={i}
+                    className="text-sm leading-relaxed text-muted-foreground pl-4 relative before:content-['·'] before:absolute before:left-0 before:text-muted-foreground/60"
+                  >
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground max-w-2xl">
+                {v.text}
+              </p>
+            )}
           </article>
         ))}
       </div>
