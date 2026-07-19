@@ -1,45 +1,29 @@
-
-export const About = () => {
-  return (
-    <section id="about" className="py-20 px-6 bg-white">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-blue-500 mx-auto"></div>
-        </div>
-        
-        <div className="flex flex-col gap-12 items-center">
-          <div className="space-y-6 text-lg text-gray-700 leading-relaxed w-full text-center">
-            <p>
-              something about yourself... <strong>bold words to catch eyes</strong>.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-2xl p-8 shadow-xl shadow-gray-400/30 w-full max-w-xl text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">What I Do</h3>
-            <div className="space-y-4 flex flex-col items-center">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                <span>bullet point 1</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span>bullet point 2</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                <span>bullet point 3</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span>bullet point 4</span>
-              </div>
-            </div>
-          </div>
+export const About = () => (
+  <section id="about" className="py-24 px-6">
+    <div className="max-w-5xl mx-auto grid md:grid-cols-[1fr_auto] gap-12 items-start">
+      <div>
+        <p className="text-sm font-medium text-primary tracking-widest uppercase mb-3">About</p>
+        <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight mb-6">
+          Building and running software end-to-end
+        </h2>
+        <div className="space-y-4 text-muted-foreground leading-relaxed max-w-2xl">
+          <p>
+            I work across the stack — native iOS clients in SwiftUI, Python
+            backend services, and the test and release infrastructure that
+            keeps them reliable in production.
+          </p>
+          <p>
+            Recently my focus has been human-reviewed AI automation: pipelines
+            where AI does the heavy lifting and a human stays in the loop for
+            every decision that matters.
+          </p>
         </div>
       </div>
-    </section>
-  );
-};
+      <img
+        src="/profile.jpg"
+        alt="Rohan Anand"
+        className="hidden md:block w-40 h-40 rounded-2xl object-cover border border-border"
+      />
+    </div>
+  </section>
+);
